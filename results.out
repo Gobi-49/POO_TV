@@ -1,0 +1,11 @@
+[ {
+  "user" : {
+    "credentials" : null,
+    "tokensCount" : 0,
+    "numFreePremiumMovies" : 0,
+    "purchasedMovies" : null,
+    "watchedMovie" : null,
+    "lickedMovie" : null,
+    "ratedMovie" : null
+  }
+} ]

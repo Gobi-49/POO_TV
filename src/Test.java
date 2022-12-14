@@ -1,5 +1,6 @@
 import checker.Checkstyle;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import program.Main;
 
 import java.io.File;
 import java.io.IOException;
