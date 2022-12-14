@@ -10,7 +10,7 @@ public class UpgradesPage extends Page {
     @Override
     public boolean acceptChange(String page) {
         ArrayList<String> acceptedPage = new ArrayList<>
-                (Arrays.asList("Homepage autentificat", "Movies", "Upgrades", "Logout"));
+                (Arrays.asList("homepage autentificat", "movies", "upgrades", "logout"));
         return acceptedPage.contains(page);
     }
 }

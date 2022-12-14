@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import filein.Input;
 import fileout.UserOut;
+import resources.Processing;
 import resources.data.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -23,17 +23,16 @@ public class Main {
 
         Input inputData = objectMapper.readValue(new File(fileNameIn), Input.class);
 
-        InputWorks.addUsersToDatabase(inputData);
-        InputWorks.addMoviesToDatabase(inputData);
-        CurrentUser currentUser = new CurrentUser();
-        InputWorks.actions(inputData,currentUser);
-        ArrayList<User> users = Database.getDatabase().getUsers();
-//        ArrayList<Movie> movies = Database.getDatabase().getMovies();
-//
+        InputProcessing.addUsersToDatabase(inputData);
+        InputProcessing.addMoviesToDatabase(inputData);
+        ActiveUser activeUser = new ActiveUser();
+        Processing processing = new Processing(objectMapper,output);
+        InputProcessing.actions(inputData, activeUser, processing);
+
         ObjectNode cred = objectMapper.createObjectNode();
 ////        User user = new User();
 ////        user.setCredentials(new Credentials("Eduard", "secret", "standard", "Romania", 200));
-        UserOut user = new UserOut(currentUser);
+        UserOut user = new UserOut(activeUser.getUser());
         cred.putPOJO("user", user);
 //        cred.putPOJO("movies", movies);
 //

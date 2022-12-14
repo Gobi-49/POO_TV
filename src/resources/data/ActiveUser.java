@@ -1,20 +1,17 @@
 package resources.data;
 
 import filein.UsersInput;
-import resources.pages.HomepageAuthenticated;
-import resources.pages.HomepageUnauthenticated;
 import resources.pages.Page;
 
-import java.util.ArrayList;
-
-public class CurrentUser extends User{
+public class ActiveUser {
+    private User user;
     private Page currentPage;
-    public CurrentUser() {
-        setCredentials(null);
+    public ActiveUser() {
+        user = null;
         currentPage = Database.getDatabase().getHomepageUnauthenticated();
     }
-    public CurrentUser(UsersInput usersInput) {
-        super(usersInput);
+    public ActiveUser(User user) {
+        this.user = user;
         currentPage = Database.getDatabase().getHomepageUnauthenticated();
     }
     public Page getCurrentPage() {
@@ -22,5 +19,11 @@ public class CurrentUser extends User{
     }
     public void setCurrentPage(Page currentPage) {
         this.currentPage = currentPage;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }

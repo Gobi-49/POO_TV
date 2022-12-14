@@ -62,4 +62,14 @@ public class Database {
     public LogoutPage getLogoutPage() {
         return logoutPage;
     }
+
+    public ArrayList<Movie> getValidMovies(User user) {
+        ArrayList <Movie> validMovies = new ArrayList<>();
+        if(user == null) {
+            return validMovies;
+        }
+        validMovies.addAll(movies);
+        validMovies.removeIf(i -> i.getCountriesBanned().contains(user.getCredentials().getCountry()));
+        return validMovies;
+    }
 }

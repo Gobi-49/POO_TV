@@ -1,15 +1,14 @@
 package fileout;
 
-import resources.data.CurrentUser;
-import resources.data.Movie;
+import resources.data.ActiveUser;
 import resources.data.User;
-import resources.pages.Page;
-
-import java.util.ArrayList;
 
 public class UserOut extends User {
-    public UserOut(CurrentUser currentUser) {
-        setCredentials(currentUser.getCredentials());
+    public UserOut(User user) {
+        if(user == null) {
+            return;
+        }
+        setCredentials(user.getCredentials());
         setLickedMovie(getLickedMovie());
         setNumFreePremiumMovies(getNumFreePremiumMovies());
         setPurchasedMovies(getPurchasedMovies());

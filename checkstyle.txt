@@ -84,7 +84,7 @@ Starting audit...
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/ActionsInput.java:65:25: Parameter rate should be final. [FinalParameters]
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/Input.java:13:26: Parameter users should be final. [FinalParameters]
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/Input.java:19:27: Parameter movies should be final. [FinalParameters]
-[ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/Input.java:25:28: Parameter actions should be final. [FinalParameters]
+[ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/Input.java:25:28: Parameter processing should be final. [FinalParameters]
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/UsersInput.java:6:5: Class 'UsersInput' looks like designed for extension (can be subclassed), but the method 'getCredentials' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'UsersInput' final or making the method 'getCredentials' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/UsersInput.java:9:5: Class 'UsersInput' looks like designed for extension (can be subclassed), but the method 'setCredentials' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'UsersInput' final or making the method 'setCredentials' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/gabi/Desktop/OOP/POO_TV/./src/filein/UsersInput.java:9:32: Parameter credentials should be final. [FinalParameters]

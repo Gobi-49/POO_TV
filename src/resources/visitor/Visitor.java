@@ -1,6 +1,5 @@
 package resources.visitor;
 
-import resources.data.CurrentUser;
 import resources.pages.*;
 
 public interface Visitor {

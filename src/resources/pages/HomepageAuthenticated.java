@@ -11,7 +11,7 @@ public class HomepageAuthenticated extends Page   {
     @Override
     public boolean acceptChange(String page) {
         ArrayList<String> acceptedPage = new ArrayList<>
-                (Arrays.asList("Movies", "Upgrades", "Logout", "Homepage autentificat"));
+                (Arrays.asList("movies", "upgrades", "logout", "homepage autentificat"));
         return acceptedPage.contains(page);
     }
 }

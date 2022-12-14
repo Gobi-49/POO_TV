@@ -10,7 +10,7 @@ public class RegisterPage extends Page {
     @Override
     public boolean acceptChange(String page) {
         ArrayList<String> acceptedPage = new ArrayList<>
-                (Arrays.asList("Register"));
+                (Arrays.asList("register"));
         return acceptedPage.contains(page);
     }
 }
