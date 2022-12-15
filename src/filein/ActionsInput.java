@@ -8,7 +8,7 @@ public class ActionsInput {
     private String startsWith;
     private String movie;
     private FiltersInput filters;
-    private int count;
+    private String count;
     private int rate;
 
     public String getType() {
@@ -53,10 +53,10 @@ public class ActionsInput {
     public void setFilters(FiltersInput filters) {
         this.filters = filters;
     }
-    public int getCount() {
+    public String getCount() {
         return count;
     }
-    public void setCount(int count) {
+    public void setCount(String count) {
         this.count = count;
     }
     public int getRate() {

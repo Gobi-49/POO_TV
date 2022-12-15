@@ -27,10 +27,9 @@ public final class InputProcessing {
                     processing.changePage(user, actionsInput);
                     break;
                 case "on page":
+                    processing.onPage(user,actionsInput);
                     break;
             }
-//            if(.equals("change page")) {
-//            }
         }
     }
 }

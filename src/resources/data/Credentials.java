@@ -2,14 +2,16 @@ package resources.data;
 
 import filein.CredentialsInput;
 
+import java.util.Objects;
+
 public class Credentials {
     private String name;
     private String password;
     private String accountType;
     private String country;
-    private int balance;
+    private String balance;
 
-    public Credentials(String name, String password, String accountType, String country, int balance) {
+    public Credentials(String name, String password, String accountType, String country, String balance) {
         this.name = name;
         this.password = password;
         this.accountType = accountType;
@@ -47,10 +49,23 @@ public class Credentials {
     public void setCountry(String country) {
         this.country = country;
     }
-    public int getBalance() {
+    public String getBalance() {
         return balance;
     }
-    public void setBalance(int balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Credentials that = (Credentials) o;
+        return Objects.equals(name, that.name) && Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, password, accountType, country, balance);
     }
 }

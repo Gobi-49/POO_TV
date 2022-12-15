@@ -1,5 +1,7 @@
 package resources.pages;
 
+import filein.CredentialsInput;
+import resources.data.ActiveUser;
 import resources.visitor.Visitable;
 import resources.visitor.Visitor;
 
@@ -10,7 +12,10 @@ public class LogoutPage extends Page {
     @Override
     public boolean acceptChange(String page) {
         ArrayList<String> acceptedPage = new ArrayList<>
-                (Arrays.asList("Logout"));
+                (Arrays.asList("logout", "login", "register"));
         return acceptedPage.contains(page);
+    }
+
+    public void logout(CredentialsInput credentialsInput, ActiveUser user) {
     }
 }

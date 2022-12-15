@@ -9,11 +9,11 @@ public class UserOut extends User {
             return;
         }
         setCredentials(user.getCredentials());
-        setLickedMovie(getLickedMovie());
-        setNumFreePremiumMovies(getNumFreePremiumMovies());
-        setPurchasedMovies(getPurchasedMovies());
-        setRatedMovie(getRatedMovie());
-        setTokensCount(getTokensCount());
-        setWatchedMovie(getWatchedMovie());
+        setLikedMovies(user.getLikedMovies());
+        setNumFreePremiumMovies(user.getNumFreePremiumMovies());
+        setPurchasedMovies(user.getPurchasedMovies());
+        setratedMovies(user.getratedMovies());
+        setTokensCount(user.getTokensCount());
+        setwatchedMovies(user.getwatchedMovies());
     }
 }
