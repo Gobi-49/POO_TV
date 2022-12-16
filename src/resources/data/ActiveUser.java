@@ -9,6 +9,7 @@ public class ActiveUser {
     private User user;
     private Page currentPage;
     private ArrayList<Movie> currentMovieList;
+    private Movie selectedMovie;
     public ActiveUser() {
         user = null;
         currentPage = Database.getDatabase().getHomepageUnauthenticated();
@@ -36,5 +37,11 @@ public class ActiveUser {
     }
     public void setCurrentMovieList(ArrayList<Movie> currentMovieList) {
         this.currentMovieList = currentMovieList;
+    }
+    public Movie getSelectedMovie() {
+        return selectedMovie;
+    }
+    public void setSelectedMovie(Movie selectedMovie) {
+        this.selectedMovie = selectedMovie;
     }
 }

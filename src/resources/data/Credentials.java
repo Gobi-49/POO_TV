@@ -25,6 +25,13 @@ public class Credentials {
         country = credentialsInput.getCountry();
         balance = credentialsInput.getBalance();
     }
+    public Credentials(Credentials credentials) {
+        name = credentials.getName();
+        password = credentials.getPassword();
+        accountType = credentials.getAccountType();
+        country = credentials.getCountry();
+        balance = credentials.getBalance();
+    }
     public String getName() {
         return name;
     }

@@ -2,8 +2,6 @@ package resources.pages;
 
 import filein.CredentialsInput;
 import resources.data.ActiveUser;
-import resources.visitor.Visitable;
-import resources.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

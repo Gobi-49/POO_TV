@@ -36,11 +36,25 @@ public abstract class Page {
     public void buyPremium(ActiveUser activeUser) {
         error();
     }
-    public void error() {
+    public void purchase(ActiveUser activeUser) {
+        error();
+    }
+    public void watch(ActiveUser activeUser) {
+        error();
+    }
+    public void like(ActiveUser activeUser) {
+        error();
+    }
+    public void rate(ActiveUser activeUser, int rate) {
+        error();
+    }
+    public static void error() {
         ObjectNode error = Processing.getObjectMapper().createObjectNode();
         error.put("error", "Error");
         error.putPOJO("currentMoviesList", new ArrayList<>());
         error.putPOJO("currentUser", null);
         Processing.getOutput().add(error);
+    }
+    public void print(ActiveUser activeUser) {
     }
 }

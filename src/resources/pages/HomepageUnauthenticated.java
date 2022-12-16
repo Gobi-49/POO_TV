@@ -1,7 +1,5 @@
 package resources.pages;
 
-import resources.visitor.Visitable;
-import resources.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

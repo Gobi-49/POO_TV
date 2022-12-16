@@ -5,8 +5,8 @@ import resources.pages.*;
 import java.util.ArrayList;
 
 public class Database {
-    private final ArrayList<User> users = new ArrayList<>();
-    private final ArrayList<Movie> movies = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<Movie> movies = new ArrayList<>();
     private static Database database = null;
     
     public static Database getDatabase() {
@@ -14,6 +14,12 @@ public class Database {
             database = new Database();
         }
         return database;
+    }
+
+    public void deleteDatabase() {
+        database = null;
+        users = new ArrayList<>();
+        movies = new ArrayList<>();
     }
     
     public void addUser(User user) {

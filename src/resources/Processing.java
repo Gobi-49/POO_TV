@@ -5,13 +5,15 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import filein.ActionsInput;
 import filein.CredentialsInput;
+import fileout.MovieOut;
 import fileout.UserOut;
-import resources.data.ActiveUser;
-import resources.data.Credentials;
-import resources.data.Database;
-import resources.data.User;
+import resources.data.*;
+import resources.pages.Page;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public final class Processing {
     private static ObjectMapper objectMapper;
@@ -30,16 +32,11 @@ public final class Processing {
 
     public void changePage(ActiveUser activeUser, ActionsInput actionsInput) {
         if (!activeUser.getCurrentPage().acceptChange(actionsInput.getPage())) {
-            ObjectNode changeCard = objectMapper.createObjectNode();
-            changeCard.put("error", "Error");
-            changeCard.putPOJO("currentMoviesList", activeUser.getCurrentMovieList());
-            if(activeUser.getUser() == null) {
-                changeCard.putPOJO("currentUser", null);
-            } else {
-                changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
-            }
-            output.add(changeCard);
+            Page.error();
             return;
+        }
+        if (activeUser.getCurrentPage() == Database.getDatabase().getDetailsPage()) {
+            activeUser.setSelectedMovie(null);
         }
         switch (actionsInput.getPage()) {
             case "Homepage neautentificat" -> activeUser.setCurrentPage(Database.getDatabase().getHomepageUnauthenticated());
@@ -50,11 +47,29 @@ public final class Processing {
                 activeUser.setCurrentPage(Database.getDatabase().getMoviesPage());
                 ObjectNode changeCard = objectMapper.createObjectNode();
                 changeCard.putPOJO("error", null);
-                changeCard.putPOJO("currentMoviesList", activeUser.getCurrentMovieList());
+                changeCard.putPOJO("currentMoviesList", MovieOut.convertMovieArray(activeUser.getCurrentMovieList()));
                 changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
                 output.add(changeCard);
             }
-            case "see details" -> activeUser.setCurrentPage(Database.getDatabase().getDetailsPage());
+            case "see details" -> {
+                String movieName = actionsInput.getMovie();
+                for(Movie i : activeUser.getCurrentMovieList()) {
+                    if(i.getName().equals(movieName)) {
+                        activeUser.setSelectedMovie(i);
+                        break;
+                    }
+                }
+                if (activeUser.getSelectedMovie() != null) {
+                    activeUser.setCurrentPage(Database.getDatabase().getDetailsPage());
+                    ObjectNode changeCard = objectMapper.createObjectNode();
+                    changeCard.putPOJO("error", null);
+                    changeCard.putPOJO("currentMoviesList", new ArrayList<>(List.of(new MovieOut(activeUser.getSelectedMovie()))));
+                    changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
+                    output.add(changeCard);
+                } else {
+                    Page.error();
+                }
+            }
             case "upgrades" -> activeUser.setCurrentPage(Database.getDatabase().getUpgradesPage());
             case "logout" -> {
                 activeUser.setCurrentPage(Database.getDatabase().getLogoutPage());
@@ -69,7 +84,12 @@ public final class Processing {
             case "register" -> activeUser.getCurrentPage().register(actionsInput.getCredentials(), activeUser);
             case "search" -> activeUser.getCurrentPage().search(activeUser, actionsInput.getStartsWith());
             case "filter" -> activeUser.getCurrentPage().filter(activeUser,actionsInput.getFilters());
-            case "buy tokens" ->
+            case "buy premium account" -> activeUser.getCurrentPage().buyPremium(activeUser);
+            case "buy tokens" -> activeUser.getCurrentPage().buyTokens(activeUser, Integer.parseInt(actionsInput.getCount()));
+            case "purchase" -> activeUser.getCurrentPage().purchase(activeUser);
+            case "watch" -> activeUser.getCurrentPage().watch(activeUser);
+            case "like" -> activeUser.getCurrentPage().like(activeUser);
+            case "rate" -> activeUser.getCurrentPage().rate(activeUser, actionsInput.getRate());
         }
     }
 }

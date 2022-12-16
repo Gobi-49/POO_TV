@@ -1,11 +1,11 @@
-package resources.data;
+package fileout;
 
 import filein.MoviesInput;
+import resources.data.Movie;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Movie {
+public class MovieOut {
     private String name;
     private int year;
     private int duration;
@@ -14,11 +14,10 @@ public class Movie {
     private ArrayList<String> countriesBanned;
     private int numLikes;
     private Double rating;
-    private ArrayList<Integer> ratings;
     private int numRatings;
-    public Movie() {
+    public MovieOut() {
     }
-    public Movie(MoviesInput moviesInput) {
+    public MovieOut(MoviesInput moviesInput) {
         name = moviesInput.getName();
         year = moviesInput.getYear();
         duration = moviesInput.getDuration();
@@ -26,9 +25,19 @@ public class Movie {
         actors = moviesInput.getActors();
         countriesBanned = moviesInput.getCountriesBanned();
         numLikes = 0;
-        rating = (double) 0;
+        rating = 0.0;
         numRatings = 0;
-        ratings = new ArrayList<>();
+    }
+    public MovieOut(Movie movie) {
+        name = movie.getName();
+        year = movie.getYear();
+        duration = movie.getDuration();
+        genres = movie.getGenres();
+        actors = movie.getActors();
+        countriesBanned = movie.getCountriesBanned();
+        numLikes = movie.getNumLikes();
+        rating = movie.getRating();
+        numRatings = movie.getNumRatings();
     }
 
     public String getName() {
@@ -86,31 +95,11 @@ public class Movie {
         this.numRatings = numRatings;
     }
 
-    public void addLike() {
-        numLikes++;
-    }
-    public void addRating(int rate) {
-        numRatings++;
-        ratings.add(rate);
-        calculateRating();
-    }
-    public void calculateRating() {
-        int sum = 0;
-        for(Integer i : ratings) {
-            sum += i;
+    public static ArrayList<MovieOut> convertMovieArray(ArrayList<Movie> movies) {
+        ArrayList<MovieOut> movieOuts = new ArrayList<>();
+        for(Movie i :movies) {
+            movieOuts.add(new MovieOut(i));
         }
-        rating = (double) (sum/numRatings);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(name, movie.name);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
+        return movieOuts;
     }
 }

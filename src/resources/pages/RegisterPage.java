@@ -2,13 +2,13 @@ package resources.pages;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import filein.CredentialsInput;
+import fileout.MovieOut;
+import fileout.UserOut;
 import resources.Processing;
 import resources.data.ActiveUser;
 import resources.data.Credentials;
 import resources.data.Database;
 import resources.data.User;
-import resources.visitor.Visitable;
-import resources.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class RegisterPage extends Page {
             if (i.getCredentials().equals(credentials)) {
                 user.setUser(i);
                 register.putPOJO("error", "Error");
-                register.putPOJO("currentMoviesList", user.getCurrentMovieList());
+                register.putPOJO("currentMoviesList", MovieOut.convertMovieArray(user.getCurrentMovieList()));
                 register.putPOJO("currentUser", null);
                 Processing.getOutput().add(register);
                 user.setCurrentPage(Database.getDatabase().getHomepageUnauthenticated());
@@ -38,8 +38,8 @@ public class RegisterPage extends Page {
         User newUser = new User(credentials);
         Database.getDatabase().addUser(newUser);
         register.putPOJO("error", null);
-        register.putPOJO("currentMoviesList", user.getCurrentMovieList());
-        register.putPOJO("currentUser", newUser);
+        register.putPOJO("currentMoviesList", MovieOut.convertMovieArray(user.getCurrentMovieList()));
+        register.putPOJO("currentUser", new UserOut(newUser));
         user.setCurrentPage(Database.getDatabase().getHomepageAuthenticated());
         user.setUser(newUser);
         user.setCurrentMovieList(Database.getDatabase().getValidMovies(user.getUser()));

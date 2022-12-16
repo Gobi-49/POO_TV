@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         String fileNameOut = "results.out";
-        String fileNameIn = "/home/gabi/Desktop/OOP/POO_TV/checker/resources/in/basic_4.json";
+        String fileNameIn = "/home/gabi/Desktop/OOP/POO_TV/checker/resources/in/basic_8.json";
 //        fileNameIn = args[0];
 //        fileNameOut = args[1];
         ObjectMapper objectMapper = new ObjectMapper();
@@ -32,5 +32,7 @@ public class Main {
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(fileNameOut),output);
+
+        Database.getDatabase().deleteDatabase();
     }
 }

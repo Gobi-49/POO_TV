@@ -11,7 +11,7 @@ public class User {
     private ArrayList<Movie> purchasedMovies;
     private ArrayList<Movie> watchedMovies;
     private ArrayList<Movie> likedMovies;
-    private ArrayList<Movie> ratedMoviess;
+    private ArrayList<Movie> ratedMovies;
     public User() {
 
     }
@@ -22,7 +22,7 @@ public class User {
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
-        ratedMoviess = new ArrayList<>();
+        ratedMovies = new ArrayList<>();
     }
     public User(UsersInput usersInput) {
         credentials = new Credentials(usersInput.getCredentials());
@@ -31,7 +31,7 @@ public class User {
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
-        ratedMoviess = new ArrayList<>();
+        ratedMovies = new ArrayList<>();
     }
 
     public Credentials getCredentials() {
@@ -58,10 +58,10 @@ public class User {
     public void setPurchasedMovies(ArrayList<Movie> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
-    public ArrayList<Movie> getwatchedMovies() {
+    public ArrayList<Movie> getWatchedMovies() {
         return watchedMovies;
     }
-    public void setwatchedMovies(ArrayList<Movie> watchedMovies) {
+    public void setWatchedMovies(ArrayList<Movie> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
     public ArrayList<Movie> getLikedMovies() {
@@ -70,16 +70,28 @@ public class User {
     public void setLikedMovies(ArrayList<Movie> likedMovies) {
         this.likedMovies = likedMovies;
     }
-    public ArrayList<Movie> getratedMovies() {
-        return ratedMoviess;
+    public ArrayList<Movie> getRatedMovies() {
+        return ratedMovies;
     }
-    public void setratedMovies(ArrayList<Movie> ratedMoviess) {
-        this.ratedMoviess = ratedMoviess;
+    public void setRatedMovies(ArrayList<Movie> ratedMovies) {
+        this.ratedMovies = ratedMovies;
     }
     public void addTokes(int tokens) {
         tokensCount += tokens;
     }
     public void removeTokes(int tokens) {
         tokensCount -= tokens;
+    }
+    public void addMovieToPurchase(Movie movie) {
+        purchasedMovies.add(movie);
+    }
+    public void addMovieToWatched(Movie movie) {
+        watchedMovies.add(movie);
+    }
+    public void addMovieToLiked(Movie movie) {
+        likedMovies.add(movie);
+    }
+    public void addMovieToRated(Movie movie) {
+        ratedMovies.add(movie);
     }
 }
