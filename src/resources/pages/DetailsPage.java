@@ -21,7 +21,8 @@ public class DetailsPage extends Page {
 
     @Override
     public void purchase(ActiveUser activeUser) {
-        if (activeUser.getUser().getNumFreePremiumMovies() > 0) {
+        if (activeUser.getUser().getNumFreePremiumMovies() > 0 &&
+                activeUser.getUser().getCredentials().getAccountType().equals("premium")) {
             activeUser.getUser().addMovieToPurchase(activeUser.getSelectedMovie());
             activeUser.getUser().setNumFreePremiumMovies(activeUser.getUser().getNumFreePremiumMovies() - 1);
             print(activeUser);

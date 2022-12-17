@@ -45,6 +45,7 @@ public final class Processing {
             case "register" -> activeUser.setCurrentPage(Database.getDatabase().getRegisterPage());
             case "movies" -> {
                 activeUser.setCurrentPage(Database.getDatabase().getMoviesPage());
+                activeUser.setCurrentMovieList(Database.getDatabase().getValidMovies(activeUser.getUser()));
                 ObjectNode changeCard = objectMapper.createObjectNode();
                 changeCard.putPOJO("error", null);
                 changeCard.putPOJO("currentMoviesList", MovieOut.convertMovieArray(activeUser.getCurrentMovieList()));

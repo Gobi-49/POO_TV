@@ -9,6 +9,7 @@ import fileout.UserOut;
 import resources.Processing;
 import resources.data.*;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -37,13 +38,21 @@ public class MoviesPage extends Page {
         Processing.getOutput().add(search);
     }
     public void filter(ActiveUser activeUser, FiltersInput filtersInput) {
-        ObjectNode filter = Processing.getObjectMapper().createObjectNode();
-        ArrayList<Movie> movies = new ArrayList<>(activeUser.getCurrentMovieList());
-//        for (Movie i : activeUser.getCurrentMovieList()) {
-//            for(String actor : i.getActors()) {
-//
-//            }
-//        }
+        ArrayList<Movie> movies = new ArrayList<>(Database.getDatabase().getValidMovies(activeUser.getUser()));
+        if(filtersInput.getContains() != null) {
+            if(filtersInput.getContains().getActors() != null) {
+                for (String i : filtersInput.getContains().getActors()) {
+                    movies.removeIf(movie -> !movie.getActors().contains(i));
+                }
+            }
+            if(filtersInput.getContains().getGenre() != null) {
+                for (String i : filtersInput.getContains().getGenre()) {
+                    movies.removeIf(movie -> !movie.getGenres().contains(i));
+                }
+            }
+        }
+        Comparator<Movie> ratingComparator = Comparator.comparing(Movie :: getRating);
+        Comparator<Movie> durationComparator = Comparator.comparing(Movie :: getDuration);
         if(filtersInput.getSort() != null) {
             if(filtersInput.getSort().getRating() != null) {
                 if (filtersInput.getSort().getRating().equals("decreasing")) {
@@ -60,10 +69,11 @@ public class MoviesPage extends Page {
                 }
             }
         }
-
+        ObjectNode filter = Processing.getObjectMapper().createObjectNode();
         filter.putPOJO("error", null);
         filter.putPOJO("currentMoviesList", MovieOut.convertMovieArray(movies));
         filter.putPOJO("currentUser", new UserOut(activeUser.getUser()));
+        activeUser.setCurrentMovieList(movies);
         Processing.getOutput().add(filter);
     }
 }
