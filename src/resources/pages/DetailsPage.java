@@ -57,6 +57,10 @@ public class DetailsPage extends Page {
     }
     @Override
     public void rate(ActiveUser activeUser, int rate) {
+        if (rate > 5 || rate < 1) {
+            error();
+            return;
+        }
         if (activeUser.getUser().getWatchedMovies().contains(activeUser.getSelectedMovie())) {
             activeUser.getUser().addMovieToRated(activeUser.getSelectedMovie());
             activeUser.getSelectedMovie().addRating(rate);
