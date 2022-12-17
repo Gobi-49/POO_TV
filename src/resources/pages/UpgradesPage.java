@@ -1,8 +1,6 @@
 package resources.pages;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import fileout.UserOut;
-import resources.Processing;
+import resources.MagicNumbers;
 import resources.data.ActiveUser;
 
 import java.util.ArrayList;
@@ -10,17 +8,17 @@ import java.util.Arrays;
 
 public class UpgradesPage extends Page {
     @Override
-    public boolean acceptChange(String page) {
-        ArrayList<String> acceptedPage = new ArrayList<>
-                (Arrays.asList("homepage autentificat", "movies", "upgrades", "logout"));
+    public final boolean acceptChange(final String page) {
+        ArrayList<String> acceptedPage = new ArrayList<>(
+                Arrays.asList("homepage autentificat", "movies", "upgrades", "logout"));
         return acceptedPage.contains(page);
     }
 
     @Override
-    public void buyTokens(ActiveUser activeUser, int count) {
+    public final void buyTokens(final ActiveUser activeUser, final int count) {
         int balance = Integer.parseInt(activeUser.getUser().getCredentials().getBalance());
         balance -= count;
-        if(balance < 0) {
+        if (balance < 0) {
             error();
             return;
         }
@@ -28,14 +26,14 @@ public class UpgradesPage extends Page {
         activeUser.getUser().getCredentials().setBalance(Integer.toString(balance));
     }
     @Override
-    public void buyPremium(ActiveUser activeUser) {
+    public final void buyPremium(final ActiveUser activeUser) {
         int tokens = activeUser.getUser().getTokensCount();
-        tokens -= 10;
-        if(tokens < 0) {
+        tokens -= MagicNumbers.PREMIUMCOST;
+        if (tokens < 0) {
             error();
             return;
         }
-        activeUser.getUser().removeTokes(10);
+        activeUser.getUser().removeTokes(MagicNumbers.PREMIUMCOST);
         activeUser.getUser().getCredentials().setAccountType("premium");
     }
 }

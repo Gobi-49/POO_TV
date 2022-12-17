@@ -11,68 +11,74 @@ public class Credentials {
     private String country;
     private String balance;
 
-    public Credentials(String name, String password, String accountType, String country, String balance) {
+    public Credentials(final String name, final String password,
+                       final String accountType, final String country,
+                       final String balance) {
         this.name = name;
         this.password = password;
         this.accountType = accountType;
         this.country = country;
         this.balance = balance;
     }
-    public Credentials(CredentialsInput credentialsInput) {
+    public Credentials(final CredentialsInput credentialsInput) {
         name = credentialsInput.getName();
         password = credentialsInput.getPassword();
         accountType = credentialsInput.getAccountType();
         country = credentialsInput.getCountry();
         balance = credentialsInput.getBalance();
     }
-    public Credentials(Credentials credentials) {
+    public Credentials(final Credentials credentials) {
         name = credentials.getName();
         password = credentials.getPassword();
         accountType = credentials.getAccountType();
         country = credentials.getCountry();
         balance = credentials.getBalance();
     }
-    public String getName() {
+    public final String getName() {
         return name;
     }
-    public void setName(String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
+    public final void setPassword(final String password) {
         this.password = password;
     }
-    public String getAccountType() {
+    public final String getAccountType() {
         return accountType;
     }
-    public void setAccountType(String accountType) {
+    public final void setAccountType(final String accountType) {
         this.accountType = accountType;
     }
-    public String getCountry() {
+    public final String getCountry() {
         return country;
     }
-    public void setCountry(String country) {
+    public final void setCountry(final String country) {
         this.country = country;
     }
-    public String getBalance() {
+    public final String getBalance() {
         return balance;
     }
-    public void setBalance(String balance) {
+    public final void setBalance(final String balance) {
         this.balance = balance;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Credentials that = (Credentials) o;
         return Objects.equals(name, that.name) && Objects.equals(password, that.password);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(name, password, accountType, country, balance);
     }
 }

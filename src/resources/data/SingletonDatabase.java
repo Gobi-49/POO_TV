@@ -4,28 +4,45 @@ import resources.pages.*;
 
 import java.util.ArrayList;
 
-public class Database {
+public final class SingletonDatabase {
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Movie> movies = new ArrayList<>();
-    private static Database database = null;
-    
-    public static Database getDatabase() {
-        if (database == null) {
-            database = new Database();
+    private static SingletonDatabase singletonDatabase = null;
+
+    /**
+     * return the singleton database and creates it if necessary
+     * @return the database
+     */
+    public static SingletonDatabase getDatabase() {
+        if (singletonDatabase == null) {
+            singletonDatabase = new SingletonDatabase();
         }
-        return database;
+        return singletonDatabase;
     }
 
+    /**
+     * deletes the database
+     * (method called at the end of the program)
+     */
     public void deleteDatabase() {
-        database = null;
+        singletonDatabase = null;
         users = new ArrayList<>();
         movies = new ArrayList<>();
     }
-    
-    public void addUser(User user) {
+
+    /**
+     * Adds a user to the database
+     * @param user the user to add
+     */
+    public void addUser(final User user) {
         users.add(user);
     }
-    public void addMovie(Movie movie) {
+
+    /**
+     * Adds a movie to the database
+     * @param movie the movie to add
+     */
+    public void addMovie(final Movie movie) {
         movies.add(movie);
     }
     public ArrayList<User> getUsers() {
@@ -69,13 +86,19 @@ public class Database {
         return logoutPage;
     }
 
-    public ArrayList<Movie> getValidMovies(User user) {
-        ArrayList <Movie> validMovies = new ArrayList<>();
-        if(user == null) {
+    /**
+     * Get the movies that the user is allowed to see
+     * @param user the current user
+     * @return an arraylist of the allowed movies
+     */
+    public ArrayList<Movie> getValidMovies(final User user) {
+        ArrayList<Movie> validMovies = new ArrayList<>();
+        if (user == null) {
             return validMovies;
         }
         validMovies.addAll(movies);
-        validMovies.removeIf(i -> i.getCountriesBanned().contains(user.getCredentials().getCountry()));
+        validMovies.removeIf(
+                i -> i.getCountriesBanned().contains(user.getCredentials().getCountry()));
         return validMovies;
     }
 }

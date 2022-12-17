@@ -1,15 +1,11 @@
 package fileout;
 
-import filein.UsersInput;
-import resources.data.ActiveUser;
 import resources.data.Credentials;
-import resources.data.Movie;
 import resources.data.User;
-import resources.pages.MoviesPage;
 
 import java.util.ArrayList;
 
-public class UserOut {
+public final class UserOut {
     private Credentials credentials;
     private int tokensCount;
     private int numFreePremiumMovies;
@@ -20,8 +16,8 @@ public class UserOut {
     public UserOut() {
 
     }
-    public UserOut(User user) {
-        if(user == null) {
+    public UserOut(final User user) {
+        if (user == null) {
             return;
         }
         credentials = new Credentials(user.getCredentials());
@@ -36,43 +32,43 @@ public class UserOut {
     public Credentials getCredentials() {
         return credentials;
     }
-    public void setCredentials(Credentials credentials) {
+    public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
     }
     public int getTokensCount() {
         return tokensCount;
     }
-    public void setTokensCount(int tokensCount) {
+    public void setTokensCount(final int tokensCount) {
         this.tokensCount = tokensCount;
     }
     public int getNumFreePremiumMovies() {
         return numFreePremiumMovies;
     }
-    public void setNumFreePremiumMovies(int numFreePremiumMovies) {
+    public void setNumFreePremiumMovies(final int numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
     public ArrayList<MovieOut> getPurchasedMovies() {
         return purchasedMovies;
     }
-    public void setPurchasedMovies(ArrayList<MovieOut> purchasedMovies) {
+    public void setPurchasedMovies(final ArrayList<MovieOut> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
     public ArrayList<MovieOut> getWatchedMovies() {
         return watchedMovies;
     }
-    public void setWatchedMovies(ArrayList<MovieOut> watchedMovies) {
+    public void setWatchedMovies(final ArrayList<MovieOut> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
     public ArrayList<MovieOut> getLikedMovies() {
         return likedMovies;
     }
-    public void setLikedMovies(ArrayList<MovieOut> likedMovies) {
+    public void setLikedMovies(final ArrayList<MovieOut> likedMovies) {
         this.likedMovies = likedMovies;
     }
     public ArrayList<MovieOut> getRatedMovies() {
         return ratedMovies;
     }
-    public void setRatedMovies(ArrayList<MovieOut> ratedMovies) {
+    public void setRatedMovies(final ArrayList<MovieOut> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
 }

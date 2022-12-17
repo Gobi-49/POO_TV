@@ -18,7 +18,7 @@ public class Movie {
     private int numRatings;
     public Movie() {
     }
-    public Movie(MoviesInput moviesInput) {
+    public Movie(final MoviesInput moviesInput) {
         name = moviesInput.getName();
         year = moviesInput.getYear();
         duration = moviesInput.getDuration();
@@ -31,102 +31,129 @@ public class Movie {
         ratings = new ArrayList<>();
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
-    public void setName(String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
-    public int getYear() {
+    public final int getYear() {
         return year;
     }
-    public void setYear(int year) {
+    public final void setYear(final int year) {
         this.year = year;
     }
-    public int getDuration() {
+    public final int getDuration() {
         return duration;
     }
-    public void setDuration(int duration) {
+    public final void setDuration(final int duration) {
         this.duration = duration;
     }
-    public ArrayList<String> getGenres() {
+    public final ArrayList<String> getGenres() {
         return genres;
     }
-    public void setGenres(ArrayList<String> genres) {
+    public final void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
-    public ArrayList<String> getActors() {
+    public final ArrayList<String> getActors() {
         return actors;
     }
-    public void setActors(ArrayList<String> actors) {
+    public final void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
-    public ArrayList<String> getCountriesBanned() {
+    public final ArrayList<String> getCountriesBanned() {
         return countriesBanned;
     }
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+    public final void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
-    public int getNumLikes() {
+    public final int getNumLikes() {
         return numLikes;
     }
-    public void setNumLikes(int numLikes) {
+    public final void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
     }
-    public Double getRating() {
+    public final Double getRating() {
         return rating;
     }
-    public void setRating(Double rating) {
+    public final void setRating(final Double rating) {
         this.rating = rating;
     }
-    public int getNumRatings() {
+    public final int getNumRatings() {
         return numRatings;
     }
-    public void setNumRatings(int numRatings) {
+    public final void setNumRatings(final int numRatings) {
         this.numRatings = numRatings;
     }
 
-    public void addLike() {
+    /**
+     * adds a like to the movie
+     */
+    public final void addLike() {
         numLikes++;
     }
-    public void addRating(int rate) {
+
+    /**
+     * adds rating to the movie
+     * @param rate the rate
+     */
+    public final void addRating(final int rate) {
         numRatings++;
         ratings.add(rate);
         calculateRating();
     }
-    public void calculateRating() {
+
+    /**
+     * Calculates the rating of the movie
+     */
+    public final void calculateRating() {
         int sum = 0;
-        for(Integer i : ratings) {
+        for (Integer i : ratings) {
             sum += i;
         }
-        rating = (double) (sum/numRatings);
+        rating = (double) (sum / numRatings);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Movie movie = (Movie) o;
         return Objects.equals(name, movie.name);
     }
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(name);
     }
 
     @Override
-    public String toString() {
-        return "Movie{" +
-                "name='" + name + '\'' +
-                ", year=" + year +
-                ", duration=" + duration +
-                ", genres=" + genres +
-                ", actors=" + actors +
-                ", countriesBanned=" + countriesBanned +
-                ", numLikes=" + numLikes +
-                ", rating=" + rating +
-                ", ratings=" + ratings +
-                ", numRatings=" + numRatings +
-                '}';
+    public final String toString() {
+        return "Movie{"
+                + "name='"
+                + name
+                + '\''
+                + ", year="
+                + year
+                + ", duration="
+                + duration
+                + ", genres="
+                + genres
+                + ", actors="
+                + actors
+                + ", countriesBanned="
+                + countriesBanned
+                + ", numLikes="
+                + numLikes
+                + ", rating="
+                + rating
+                + ", ratings="
+                + ratings
+                + ", numRatings="
+                + numRatings
+                + '}';
     }
 }

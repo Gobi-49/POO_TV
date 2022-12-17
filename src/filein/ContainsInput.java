@@ -3,19 +3,19 @@ package filein;
 import java.util.ArrayList;
 
 public class ContainsInput {
-    ArrayList<String> actors;
-    ArrayList<String> genre;
+    private ArrayList<String> actors;
+    private ArrayList<String> genre;
 
-    public ArrayList<String> getActors() {
+    public final ArrayList<String> getActors() {
         return actors;
     }
-    public void setActors(ArrayList<String> actors) {
+    public final void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
-    public ArrayList<String> getGenre() {
+    public final ArrayList<String> getGenre() {
         return genre;
     }
-    public void setGenre(ArrayList<String> genre) {
+    public final void setGenre(final ArrayList<String> genre) {
         this.genre = genre;
     }
 }

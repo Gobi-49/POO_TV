@@ -4,16 +4,16 @@ public class SortInput {
     private String rating;
     private String duration;
 
-    public String getRating() {
+    public final String getRating() {
         return rating;
     }
-    public void setRating(String rating) {
+    public final void setRating(final String rating) {
         this.rating = rating;
     }
-    public String getDuration() {
+    public final String getDuration() {
         return duration;
     }
-    public void setDuration(String duration) {
+    public final void setDuration(final String duration) {
         this.duration = duration;
     }
 }

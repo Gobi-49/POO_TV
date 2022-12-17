@@ -1,6 +1,7 @@
 package resources.data;
 
 import filein.UsersInput;
+import resources.MagicNumbers;
 
 import java.util.ArrayList;
 
@@ -15,83 +16,113 @@ public class User {
     public User() {
 
     }
-    public User(Credentials credentials) {
+    public User(final Credentials credentials) {
         this.credentials = credentials;
         tokensCount = 0;
-        numFreePremiumMovies = 15;
+        numFreePremiumMovies = MagicNumbers.NRTOKENS;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
     }
-    public User(UsersInput usersInput) {
+    public User(final UsersInput usersInput) {
         credentials = new Credentials(usersInput.getCredentials());
         tokensCount = 0;
-        numFreePremiumMovies = 15;
+        numFreePremiumMovies = MagicNumbers.NRTOKENS;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
     }
 
-    public Credentials getCredentials() {
+    public final Credentials getCredentials() {
         return credentials;
     }
-    public void setCredentials(Credentials credentials) {
+    public final void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
     }
-    public int getTokensCount() {
+    public final int getTokensCount() {
         return tokensCount;
     }
-    public void setTokensCount(int tokensCount) {
+    public final void setTokensCount(final int tokensCount) {
         this.tokensCount = tokensCount;
     }
-    public int getNumFreePremiumMovies() {
+    public final int getNumFreePremiumMovies() {
         return numFreePremiumMovies;
     }
-    public void setNumFreePremiumMovies(int numFreePremiumMovies) {
+    public final void setNumFreePremiumMovies(final int numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
-    public ArrayList<Movie> getPurchasedMovies() {
+    public final ArrayList<Movie> getPurchasedMovies() {
         return purchasedMovies;
     }
-    public void setPurchasedMovies(ArrayList<Movie> purchasedMovies) {
+    public final void setPurchasedMovies(final ArrayList<Movie> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
-    public ArrayList<Movie> getWatchedMovies() {
+    public final ArrayList<Movie> getWatchedMovies() {
         return watchedMovies;
     }
-    public void setWatchedMovies(ArrayList<Movie> watchedMovies) {
+    public final void setWatchedMovies(final ArrayList<Movie> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
-    public ArrayList<Movie> getLikedMovies() {
+    public final ArrayList<Movie> getLikedMovies() {
         return likedMovies;
     }
-    public void setLikedMovies(ArrayList<Movie> likedMovies) {
+    public final void setLikedMovies(final ArrayList<Movie> likedMovies) {
         this.likedMovies = likedMovies;
     }
-    public ArrayList<Movie> getRatedMovies() {
+    public final ArrayList<Movie> getRatedMovies() {
         return ratedMovies;
     }
-    public void setRatedMovies(ArrayList<Movie> ratedMovies) {
+    public final void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
-    public void addTokes(int tokens) {
+
+    /**
+     * adds tokens to the user
+     * @param tokens the number of tokens
+     */
+    public final void addTokes(final int tokens) {
         tokensCount += tokens;
     }
-    public void removeTokes(int tokens) {
+
+    /**
+     * removes tokens from the user
+     * @param tokens the number of tokens
+     */
+    public final void removeTokes(final int tokens) {
         tokensCount -= tokens;
     }
-    public void addMovieToPurchase(Movie movie) {
+
+    /**
+     * adds a movie to the purchased movies array
+     * @param movie the movie to add
+     */
+    public final void addMovieToPurchase(final Movie movie) {
         purchasedMovies.add(movie);
     }
-    public void addMovieToWatched(Movie movie) {
+
+    /**
+     * adds a movie to the watchedMovies array
+     * @param movie the movie to add
+     */
+    public final void addMovieToWatched(final Movie movie) {
         watchedMovies.add(movie);
     }
-    public void addMovieToLiked(Movie movie) {
+
+    /**
+     * adds a movie to the lickedMovie array
+     * @param movie the movie to add
+     */
+    public final void addMovieToLiked(final Movie movie) {
         likedMovies.add(movie);
     }
-    public void addMovieToRated(Movie movie) {
+
+    /**
+     * adds a movie to the ratedMovie array
+     * @param movie the movie to add
+     */
+    public final void addMovieToRated(final Movie movie) {
         ratedMovies.add(movie);
     }
 }
