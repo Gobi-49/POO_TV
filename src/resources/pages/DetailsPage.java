@@ -22,6 +22,10 @@ public class DetailsPage extends Page {
 
     @Override
     public final void purchase(final ActiveUser activeUser) {
+        if (activeUser.getSelectedMovie() == null) {
+            error();
+            return;
+        }
         if (activeUser.getUser().getNumFreePremiumMovies() > 0
                 && activeUser.getUser().getCredentials().getAccountType().equals("premium")) {
             activeUser.getUser().addMovieToPurchase(activeUser.getSelectedMovie());
@@ -83,5 +87,17 @@ public class DetailsPage extends Page {
                 new ArrayList<>(List.of(new MovieOut(activeUser.getSelectedMovie()))));
         seeDetails.putPOJO("currentUser", new UserOut(activeUser.getUser()));
         Processing.getOutput().add(seeDetails);
+    }
+
+    @Override
+    public void defaultAction(ActiveUser activeUser) {
+        if (activeUser.getSelectedMovie() != null) {
+            ObjectNode changeCard = Processing.getObjectMapper().createObjectNode();
+            changeCard.putPOJO("error", null);
+            changeCard.putPOJO("currentMoviesList",
+                    new ArrayList<>(List.of(new MovieOut(activeUser.getSelectedMovie()))));
+            changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
+            Processing.getOutput().add(changeCard);
+        }
     }
 }

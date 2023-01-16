@@ -13,6 +13,8 @@ public class User {
     private ArrayList<Movie> watchedMovies;
     private ArrayList<Movie> likedMovies;
     private ArrayList<Movie> ratedMovies;
+    private ArrayList<String> notifications;
+    private ArrayList<String> subscribed;
     public User() {
 
     }
@@ -24,6 +26,8 @@ public class User {
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
+        notifications = new ArrayList<>();
+        subscribed = new ArrayList<>();
     }
     public User(final UsersInput usersInput) {
         credentials = new Credentials(usersInput.getCredentials());
@@ -33,6 +37,8 @@ public class User {
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
+        notifications = new ArrayList<>();
+        subscribed = new ArrayList<>();
     }
 
     public final Credentials getCredentials() {
@@ -76,6 +82,18 @@ public class User {
     }
     public final void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
+    }
+    public ArrayList<String> getNotifications() {
+        return notifications;
+    }
+    public void setNotifications(ArrayList<String> notifications) {
+        this.notifications = notifications;
+    }
+    public ArrayList<String> getSubscribed() {
+        return subscribed;
+    }
+    public void setSubscribed(ArrayList<String> subscribed) {
+        this.subscribed = subscribed;
     }
 
     /**

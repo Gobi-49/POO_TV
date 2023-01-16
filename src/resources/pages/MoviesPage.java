@@ -79,4 +79,21 @@ public class MoviesPage extends Page {
         activeUser.setCurrentMovieList(movies);
         Processing.getOutput().add(filter);
     }
+
+    @Override
+    public void print(ActiveUser activeUser) {
+        ObjectNode changeCard = Processing.getObjectMapper().createObjectNode();
+        changeCard.putPOJO("error", null);
+        changeCard.putPOJO("currentMoviesList",
+                MovieOut.convertMovieArray(activeUser.getCurrentMovieList()));
+        changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
+        Processing.getOutput().add(changeCard);
+    }
+
+    @Override
+    public void defaultAction(ActiveUser activeUser) {
+        activeUser.setCurrentMovieList(
+                SingletonDatabase.getDatabase().getValidMovies(activeUser.getUser()));
+        print(activeUser);
+    }
 }

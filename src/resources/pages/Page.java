@@ -3,10 +3,15 @@ package resources.pages;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import filein.CredentialsInput;
 import filein.FiltersInput;
+import fileout.MovieOut;
+import fileout.UserOut;
 import program.Processing;
+import program.changePage.changePgCom;
 import resources.data.ActiveUser;
+import resources.data.SingletonDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Page {
     /**
@@ -135,5 +140,9 @@ public abstract class Page {
      * @param activeUser the current user
      */
     public void print(final ActiveUser activeUser) {
+    }
+
+    public void defaultAction(final ActiveUser activeUser) {
+
     }
 }

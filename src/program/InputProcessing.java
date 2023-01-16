@@ -42,6 +42,7 @@ public final class InputProcessing {
             switch (actionsInput.getType()) {
                 case "change page" -> processing.changePage(user, actionsInput);
                 case "on page" -> processing.onPage(user, actionsInput);
+                case "back" -> processing.backPage(user);
             }
         }
     }

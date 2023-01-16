@@ -13,6 +13,7 @@ public final class UserOut {
     private ArrayList<MovieOut> watchedMovies;
     private ArrayList<MovieOut> likedMovies;
     private ArrayList<MovieOut> ratedMovies;
+    private ArrayList<String> notifications;
     public UserOut() {
 
     }
@@ -27,6 +28,7 @@ public final class UserOut {
         purchasedMovies = MovieOut.convertMovieArray(user.getPurchasedMovies());
         ratedMovies = MovieOut.convertMovieArray(user.getRatedMovies());
         watchedMovies = MovieOut.convertMovieArray(user.getWatchedMovies());
+        notifications = new ArrayList<>(user.getNotifications());
     }
 
     public Credentials getCredentials() {
@@ -70,5 +72,11 @@ public final class UserOut {
     }
     public void setRatedMovies(final ArrayList<MovieOut> ratedMovies) {
         this.ratedMovies = ratedMovies;
+    }
+    public ArrayList<String> getNotifications() {
+        return notifications;
+    }
+    public void setNotifications(ArrayList<String> notifications) {
+        this.notifications = notifications;
     }
 }

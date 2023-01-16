@@ -17,6 +17,8 @@ public class Main {
     public static void main(final String[] args) throws IOException {
         String fileNameOut;
         String fileNameIn;
+        fileNameIn = "/home/gabi/Desktop/OOP/POO_TV/checker/resources/in/basic_1.json";
+        fileNameOut = "results.out";
         fileNameIn = args[0];
         fileNameOut = args[1];
         ObjectMapper objectMapper = new ObjectMapper();

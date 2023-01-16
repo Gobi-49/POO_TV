@@ -5,6 +5,7 @@ import filein.CredentialsInput;
 import fileout.MovieOut;
 import fileout.UserOut;
 import program.Processing;
+import program.changePage.Invoker;
 import resources.data.ActiveUser;
 import resources.data.Credentials;
 import resources.data.SingletonDatabase;
@@ -47,5 +48,10 @@ public class LoginPage extends Page {
         login.putPOJO("currentMoviesList", MovieOut.convertMovieArray(user.getCurrentMovieList()));
         login.putPOJO("currentUser", null);
         Processing.getOutput().add(login);
+    }
+
+    @Override
+    public void defaultAction(ActiveUser activeUser) {
+        activeUser.setHistory(new Invoker());
     }
 }

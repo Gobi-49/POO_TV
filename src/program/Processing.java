@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import filein.ActionsInput;
 import fileout.MovieOut;
 import fileout.UserOut;
+import program.changePage.Invoker;
+import program.changePage.changePgCom;
 import resources.data.Movie;
 import resources.data.SingletonDatabase;
 import resources.data.ActiveUser;
@@ -44,24 +46,17 @@ public final class Processing {
             activeUser.setSelectedMovie(null);
         }
         switch (actionsInput.getPage()) {
-            case "Homepage neautentificat" -> activeUser.setCurrentPage(
-                    SingletonDatabase.getDatabase().getHomepageUnauthenticated());
-            case "Homepage autentificat" -> activeUser.setCurrentPage(
-                    SingletonDatabase.getDatabase().getHomepageAuthenticated());
-            case "login" -> activeUser.setCurrentPage(
-                    SingletonDatabase.getDatabase().getLoginPage());
-            case "register" -> activeUser.setCurrentPage(
-                    SingletonDatabase.getDatabase().getRegisterPage());
+            case "Homepage neautentificat" -> activeUser.getHistory().changePage(new changePgCom(
+                    activeUser, SingletonDatabase.getDatabase().getHomepageUnauthenticated()));
+            case "Homepage autentificat" -> activeUser.getHistory().changePage(new changePgCom(
+                    activeUser, SingletonDatabase.getDatabase().getHomepageAuthenticated()));
+            case "login" -> activeUser.getHistory().changePage(new changePgCom(
+                    activeUser, SingletonDatabase.getDatabase().getLoginPage()));
+            case "register" -> activeUser.getHistory().changePage(new changePgCom(
+                    activeUser, SingletonDatabase.getDatabase().getRegisterPage()));
             case "movies" -> {
-                activeUser.setCurrentPage(SingletonDatabase.getDatabase().getMoviesPage());
-                activeUser.setCurrentMovieList(
-                        SingletonDatabase.getDatabase().getValidMovies(activeUser.getUser()));
-                ObjectNode changeCard = objectMapper.createObjectNode();
-                changeCard.putPOJO("error", null);
-                changeCard.putPOJO("currentMoviesList",
-                        MovieOut.convertMovieArray(activeUser.getCurrentMovieList()));
-                changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
-                output.add(changeCard);
+                activeUser.getHistory().changePage(new changePgCom(
+                        activeUser, SingletonDatabase.getDatabase().getMoviesPage()));
             }
             case "see details" -> {
                 String movieName = actionsInput.getMovie();
@@ -72,19 +67,14 @@ public final class Processing {
                     }
                 }
                 if (activeUser.getSelectedMovie() != null) {
-                    activeUser.setCurrentPage(SingletonDatabase.getDatabase().getDetailsPage());
-                    ObjectNode changeCard = objectMapper.createObjectNode();
-                    changeCard.putPOJO("error", null);
-                    changeCard.putPOJO("currentMoviesList",
-                            new ArrayList<>(List.of(new MovieOut(activeUser.getSelectedMovie()))));
-                    changeCard.putPOJO("currentUser", new UserOut(activeUser.getUser()));
-                    output.add(changeCard);
+                    activeUser.getHistory().changePage(new changePgCom(
+                            activeUser, SingletonDatabase.getDatabase().getDetailsPage()));
                 } else {
                     Page.error();
                 }
             }
-            case "upgrades" -> activeUser.setCurrentPage(
-                    SingletonDatabase.getDatabase().getUpgradesPage());
+            case "upgrades" -> activeUser.getHistory().changePage(new changePgCom(
+                    activeUser, SingletonDatabase.getDatabase().getUpgradesPage()));
             case "logout" -> {
                 activeUser.setCurrentPage(SingletonDatabase.getDatabase().getLogoutPage());
                 activeUser.setUser(null);
@@ -115,6 +105,22 @@ public final class Processing {
             case "watch" -> activeUser.getCurrentPage().watch(activeUser);
             case "like" -> activeUser.getCurrentPage().like(activeUser);
             case "rate" -> activeUser.getCurrentPage().rate(activeUser, actionsInput.getRate());
+            case "subscribe" -> {
+                if (activeUser.getCurrentPage() == SingletonDatabase.getDatabase().getDetailsPage()) {
+                    if (activeUser.getSelectedMovie().getGenres().contains(actionsInput.getSubscribedGenre())
+                            && !activeUser.getUser().getSubscribed().contains(actionsInput.getSubscribedGenre())) {
+                        activeUser.getUser().getSubscribed().add(actionsInput.getSubscribedGenre());
+                    } else {
+                        Page.error();
+                    }
+                } else {
+                    Page.error();
+                }
+            }
         }
+    }
+
+    public void backPage(final ActiveUser activeUser) {
+        activeUser.getHistory().undo();
     }
 }
