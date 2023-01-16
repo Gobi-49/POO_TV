@@ -3,18 +3,19 @@ package resources.data;
 import filein.MoviesInput;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Movie {
     private String name;
-    private int year;
+    private String year;
     private int duration;
     private ArrayList<String> genres;
     private ArrayList<String> actors;
     private ArrayList<String> countriesBanned;
     private int numLikes;
     private Double rating;
-    private ArrayList<Integer> ratings;
+    private HashMap<User, Integer> ratings;
     private int numRatings;
     public Movie() {
     }
@@ -28,7 +29,7 @@ public class Movie {
         numLikes = 0;
         rating = (double) 0;
         numRatings = 0;
-        ratings = new ArrayList<>();
+        ratings = new HashMap<>();
     }
 
     public final String getName() {
@@ -37,10 +38,10 @@ public class Movie {
     public final void setName(final String name) {
         this.name = name;
     }
-    public final int getYear() {
+    public final String getYear() {
         return year;
     }
-    public final void setYear(final int year) {
+    public final void setYear(final String year) {
         this.year = year;
     }
     public final int getDuration() {
@@ -97,21 +98,21 @@ public class Movie {
      * adds rating to the movie
      * @param rate the rate
      */
-    public final void addRating(final int rate) {
-        numRatings++;
-        ratings.add(rate);
+    public final void addRating(final int rate, User user) {
+        ratings.put(user, rate);
         calculateRating();
+        numRatings = ratings.size();
     }
 
     /**
      * Calculates the rating of the movie
      */
     public final void calculateRating() {
-        int sum = 0;
-        for (Integer i : ratings) {
-            sum += i;
+        double sum = 0;
+        for (User i : ratings.keySet()) {
+            sum += ratings.get(i);
         }
-        rating = (double) (sum / numRatings);
+        rating = sum / ratings.size();
     }
 
     @Override
@@ -125,6 +126,7 @@ public class Movie {
         Movie movie = (Movie) o;
         return Objects.equals(name, movie.name);
     }
+
     @Override
     public final int hashCode() {
         return Objects.hash(name);

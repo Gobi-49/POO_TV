@@ -22,7 +22,8 @@ public class DetailsPage extends Page {
 
     @Override
     public final void purchase(final ActiveUser activeUser) {
-        if (activeUser.getSelectedMovie() == null) {
+        if (activeUser.getSelectedMovie() == null ||
+                activeUser.getUser().getPurchasedMovies().contains(activeUser.getSelectedMovie())) {
             error();
             return;
         }
@@ -45,6 +46,11 @@ public class DetailsPage extends Page {
     @Override
     public final void watch(final ActiveUser activeUser) {
         if (activeUser.getUser().getPurchasedMovies().contains(activeUser.getSelectedMovie())) {
+            if (activeUser.getUser().getWatchedMovies().contains(
+                    activeUser.getSelectedMovie())) {
+                print(activeUser);
+                return;
+            }
             activeUser.getUser().addMovieToWatched(activeUser.getSelectedMovie());
             print(activeUser);
             return;
@@ -54,6 +60,11 @@ public class DetailsPage extends Page {
     @Override
     public final void like(final ActiveUser activeUser) {
         if (activeUser.getUser().getWatchedMovies().contains(activeUser.getSelectedMovie())) {
+            if (activeUser.getUser().getLikedMovies().contains(
+                    activeUser.getSelectedMovie())) {
+                print(activeUser);
+                return;
+            }
             activeUser.getUser().addMovieToLiked(activeUser.getSelectedMovie());
             activeUser.getSelectedMovie().addLike();
             print(activeUser);
@@ -68,8 +79,11 @@ public class DetailsPage extends Page {
             return;
         }
         if (activeUser.getUser().getWatchedMovies().contains(activeUser.getSelectedMovie())) {
-            activeUser.getUser().addMovieToRated(activeUser.getSelectedMovie());
-            activeUser.getSelectedMovie().addRating(rate);
+            if (!activeUser.getUser().getRatedMovies().contains(
+                    activeUser.getSelectedMovie())) {
+                activeUser.getUser().addMovieToRated(activeUser.getSelectedMovie());
+            }
+            activeUser.getSelectedMovie().addRating(rate, activeUser.getUser());
             print(activeUser);
             return;
         }

@@ -13,7 +13,7 @@ public class User {
     private ArrayList<Movie> watchedMovies;
     private ArrayList<Movie> likedMovies;
     private ArrayList<Movie> ratedMovies;
-    private ArrayList<String> notifications;
+    private ArrayList<Notification> notifications;
     private ArrayList<String> subscribed;
     public User() {
 
@@ -83,10 +83,10 @@ public class User {
     public final void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
-    public ArrayList<String> getNotifications() {
+    public ArrayList<Notification> getNotifications() {
         return notifications;
     }
-    public void setNotifications(ArrayList<String> notifications) {
+    public void setNotifications(ArrayList<Notification> notifications) {
         this.notifications = notifications;
     }
     public ArrayList<String> getSubscribed() {
@@ -142,5 +142,18 @@ public class User {
      */
     public final void addMovieToRated(final Movie movie) {
         ratedMovies.add(movie);
+    }
+
+    public void addNotification(Notification notification) {
+        notifications.add(notification);
+    }
+
+    public boolean hasMovie(String movieName) {
+        for (Movie i : purchasedMovies) {
+            if (i.getName().equals(movieName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

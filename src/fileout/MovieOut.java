@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public final class MovieOut {
     private String name;
-    private int year;
+    private String year;
     private int duration;
     private ArrayList<String> genres;
     private ArrayList<String> actors;
@@ -46,10 +46,10 @@ public final class MovieOut {
     public void setName(final String name) {
         this.name = name;
     }
-    public int getYear() {
+    public String getYear() {
         return year;
     }
-    public void setYear(final int year) {
+    public void setYear(final String year) {
         this.year = year;
     }
     public int getDuration() {

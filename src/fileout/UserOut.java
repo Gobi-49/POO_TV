@@ -1,6 +1,7 @@
 package fileout;
 
 import resources.data.Credentials;
+import resources.data.Notification;
 import resources.data.User;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public final class UserOut {
     private ArrayList<MovieOut> watchedMovies;
     private ArrayList<MovieOut> likedMovies;
     private ArrayList<MovieOut> ratedMovies;
-    private ArrayList<String> notifications;
+    private ArrayList<Notification> notifications;
     public UserOut() {
 
     }
@@ -73,10 +74,10 @@ public final class UserOut {
     public void setRatedMovies(final ArrayList<MovieOut> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
-    public ArrayList<String> getNotifications() {
+    public ArrayList<Notification> getNotifications() {
         return notifications;
     }
-    public void setNotifications(ArrayList<String> notifications) {
+    public void setNotifications(ArrayList<Notification> notifications) {
         this.notifications = notifications;
     }
 }

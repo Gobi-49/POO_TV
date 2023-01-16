@@ -3,6 +3,7 @@ package resources.data;
 import resources.pages.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public final class SingletonDatabase {
     private ArrayList<User> users = new ArrayList<>();
@@ -100,5 +101,18 @@ public final class SingletonDatabase {
         validMovies.removeIf(
                 i -> i.getCountriesBanned().contains(user.getCredentials().getCountry()));
         return validMovies;
+    }
+
+    public boolean containsMovie(String movieName) {
+        for (Movie i : movies) {
+            if (i.getName().equals(movieName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeMovie(String movieName) {
+        movies.removeIf(movie -> Objects.equals(movie.getName(), movieName));
     }
 }
